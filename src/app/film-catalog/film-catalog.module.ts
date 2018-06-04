@@ -9,6 +9,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { FilmItemComponent } from './film-item/film-item.component';
+import { FilmsListComponent } from './films-list/films-list.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   declarations: [
     MainComponent, 
     FilmsComponent, 
-    DetailsComponent
+    DetailsComponent, 
+    FilmItemComponent, FilmsListComponent
   ]
 })
 export class FilmCatalogModule { }
