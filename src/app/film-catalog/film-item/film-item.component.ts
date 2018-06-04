@@ -13,11 +13,11 @@ export class FilmItemComponent implements OnInit {
 
   @Output() onChanged = new EventEmitter<boolean>();
 
-  // buttonDisabled: boolean = true;
+  buttonStatus: boolean = false;
 
   change(increased: any) {
     this.onChanged.emit(increased);
-    // this.buttonDisabled = false;
+    this.buttonStatus = true;
   }
   
   ngOnInit() {
