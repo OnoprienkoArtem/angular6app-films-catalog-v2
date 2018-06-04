@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { FilmService } from '../film.service';
 
 @Component({
   selector: 'app-film-item',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./film-item.component.css']
 })
 export class FilmItemComponent implements OnInit {
+  items: object[] = [];
 
-  constructor() { }
+  constructor(public filmsService: FilmService) { }
 
+  @Output() onChanged = new EventEmitter<boolean>();
+
+  // buttonDisabled: boolean = true;
+
+  change(increased: any) {
+    this.onChanged.emit(increased);
+    // this.buttonDisabled = false;
+  }
+  
   ngOnInit() {
+    this.items = this.filmsService.getData();
   }
 
 }

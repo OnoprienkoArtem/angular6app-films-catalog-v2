@@ -1,3 +1,21 @@
-<p>
-  films-list works!
-</p>
+<mat-card class="menu-card">
+
+  <mat-toolbar class="menu-toolbar">
+    <mat-toolbar-row>
+      <span >В избранное добавлено: {{ favorites }} элементов</span>
+      <span class="example-spacer"></span>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Сортировка" [(value)]='selected'>
+            <mat-option [value]="ASC">По алфавиту: A-Я</mat-option>
+            <mat-option [value]="DESC">По алфавиту: Я-A </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+</mat-card>
+
+
+<app-film-item (onChanged)="onChanged($event)"></app-film-item>
