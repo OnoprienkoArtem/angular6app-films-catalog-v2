@@ -11,13 +11,14 @@ export class FilmItemComponent implements OnInit {
 
   constructor(public filmsService: FilmService) { }
 
-  @Output() onChanged = new EventEmitter<boolean>();
+  @Output() onChanged = new EventEmitter(); 
 
-  buttonStatus: boolean = false;
+  // buttonStatus: boolean = false;
 
   change(increased: any) {
     this.onChanged.emit(increased);
-    this.buttonStatus = true;
+    
+    // this.buttonStatus = true;
   }
   
   ngOnInit() {

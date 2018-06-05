@@ -6,25 +6,23 @@ import { FilmService } from '../film.service';
   styleUrls: ['./films-list.component.css']
 })
 export class FilmsListComponent implements OnInit {
-  items: object[] = [];
-
-  
+  items: object[] = [];  
 
   constructor(public filmsService: FilmService) { }
-
 
   favorites: number = 0;
 
   onChanged(increased: any) {
-    increased == true ? this.favorites++ : this.favorites--;
+    if(increased == true) {
+      this.favorites++;
+    }  
   }
 
   ngOnInit() {
     // this.items = this.filmsService.getData();
     // console.log(this.items);
     // for(let item of this.items) {
-    //   console.log(item.name.charAt(0)); 
-      
+    //   console.log(item.name.charAt(0));       
       
     } 
   }
