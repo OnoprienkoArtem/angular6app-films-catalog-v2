@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-// import { FilmService } from '../film.service';
+import { FilmService } from '../film.service';
+import { FilmItemComponent } from '../film-item/film-item.component';
 @Component({
   selector: 'app-films-list',
   templateUrl: './films-list.component.html',
   styleUrls: ['./films-list.component.css']
 })
 export class FilmsListComponent implements OnInit {
-  // items: object[] = [];  
+  items: object[] = [];  
 
-  constructor() { }
+  constructor(public filmsService: FilmService) { }
 
   favorites: number = 0;
 
@@ -19,10 +20,8 @@ export class FilmsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.items = this.filmsService.getData();
-    // console.log(this.items);
-    // for(let item of this.items) {
-    //   console.log(item.name.charAt(0));       
+    this.items = this.filmsService.getData();
+     
       
     } 
   }
