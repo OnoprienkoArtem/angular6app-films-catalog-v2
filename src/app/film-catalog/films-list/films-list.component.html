@@ -8,9 +8,9 @@
         <span class="example-spacer"></span>
         <div>
           <mat-form-field>
-            <mat-select placeholder="Сортировка" [(value)]='selected'>
-              <mat-option [value]="ASC">По алфавиту: A-Я</mat-option>
-              <mat-option [value]="DESC">По алфавиту: Я-A </mat-option>
+            <mat-select placeholder="Сортировка" [(value)]='selectedValue'>
+              <mat-option *ngFor="let item of sortOptions" [value]="item.value"> {{item.viewValue}}</mat-option>
+              
             </mat-select>
           </mat-form-field>
         </div>
@@ -19,7 +19,7 @@
   </mat-card>
 
   <mat-grid-list cols="3" rowHeight="750px">
-    <mat-grid-tile colspan="1" *ngFor="let item of items">
+    <mat-grid-tile colspan="1" *ngFor="let item of sortedList(allFilms, selectedValue)">
       <app-film-item [item]="item" (onChanged)="onChanged($event)"></app-film-item>
     </mat-grid-tile>
   </mat-grid-list>

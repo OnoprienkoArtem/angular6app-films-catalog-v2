@@ -13,6 +13,14 @@ export class FilmsListComponent implements OnInit {
 
   favorites: number = 0;
 
+  allFilms;
+  selectedValue: string;
+
+  sortOptions = [
+    { value: 'ASC', viewValue: 'По алфавиту: A-Z' },
+    { value: 'DESC', viewValue: 'По алфавиту: Z-A' }
+  ];
+
   onChanged(increased: any) {
     if(increased == true) {
       this.favorites++;
@@ -20,9 +28,20 @@ export class FilmsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.items = this.filmsService.getData();
-     
+    this.allFilms = this.filmsService.getData();
       
     } 
+
+  sortedList(elem, option?) {
+    if (option === 'DESC') {
+      return elem.sort(this.sortByName).reverse();
+    }
+    return elem.sort(this.sortByName);
+  }
+  sortByName(a, b) {
+    if (a.name < b.name) { return -1; }
+    if (a.name > b.name) { return 1; }
+    return 0;
+  }
   }
 
