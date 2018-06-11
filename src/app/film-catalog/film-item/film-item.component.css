@@ -1,35 +1,22 @@
 .example-card {
-    max-width: 400px;
+    max-width: 275px;;
 }
 
-
-
-.films-card {
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    height: 648px;
-    padding: 16px;
+.mat-card-title {
+    text-align: left;
 }
 
-.mat-card-image {
-    align-self: center;
-    height: 420px;
-    width: 298px;
-}
-
-.mat-card-header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.mat-card-actions {
-    padding: 0;
-}
-
-.mat-card-header-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 0;
+.block-ellipsis {
+    text-align: left;
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 60px;
+    margin: 0 auto;
+    font-size: 12px;
+    line-height: 1;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

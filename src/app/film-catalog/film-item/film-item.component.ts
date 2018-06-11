@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { FilmService } from '../film.service';
+
 
 @Component({
   selector: 'app-film-item',
@@ -7,9 +7,11 @@ import { FilmService } from '../film.service';
   styleUrls: ['./film-item.component.css']
 })
 export class FilmItemComponent implements OnInit {
-  items: object[] = [];
+  // items: object[] = [];  
 
-  constructor(public filmsService: FilmService) { }
+  @Input() item; 
+
+  constructor() { }
 
   @Output() onChanged = new EventEmitter(); 
 
@@ -22,7 +24,7 @@ export class FilmItemComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.items = this.filmsService.getData();
+   
   }
 
 }
