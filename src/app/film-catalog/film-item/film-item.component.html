@@ -7,7 +7,7 @@
    <p class="block-ellipsis"> {{ item.description }} </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button (click)="change(true)">Добавить в избранное</button>
+    <button mat-button (click)="addToFavorites(item)" [class.redText]="isPressed">{{item.isFavorite ? 'Убрать из избранного' : 'Добавить в избранное'}}</button>
   </mat-card-actions>
 </mat-card>
 

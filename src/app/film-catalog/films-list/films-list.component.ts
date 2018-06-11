@@ -7,32 +7,26 @@ import { FilmItemComponent } from '../film-item/film-item.component';
   styleUrls: ['./films-list.component.css']
 })
 export class FilmsListComponent implements OnInit {
-  items: object[] = [];  
-
-  constructor(public filmsService: FilmService) { }
-
+  items: object[] = []; 
+  filmFiltered: object[];
   favorites: number = 0;
-
   allFilms;
   selectedValue: string;
-
   sortOptions = [
     { value: 'ASC', viewValue: 'По алфавиту: A-Z' },
     { value: 'DESC', viewValue: 'По алфавиту: Z-A' }
   ];
+  show: boolean = true;
 
-  onChanged(increased: any) {
-    if(increased == true) {
-      this.favorites++;
-    }  
-  }
 
-  ngOnInit() {
-    this.allFilms = this.filmsService.getData();
-      
-    } 
+  constructor(public filmsService: FilmService) { }
 
-  sortedList(elem, option?) {
+  addFilmObj(filmObj) {    
+    this.filmFiltered = this.allFilms.filter(item => item.isFavorite);   
+    this.favorites = this.filmFiltered.length; 
+  } 
+
+  sortList(elem, option?) {
     if (option === 'DESC') {
       return elem.sort(this.sortByName).reverse();
     }
@@ -43,5 +37,35 @@ export class FilmsListComponent implements OnInit {
     if (a.name > b.name) { return 1; }
     return 0;
   }
+
+  filmName: string;
+  changInput(e) {
+    // this.filmName = this.allFilms.filter(item => item.name);
+    // console.log(this.allFilms[1].name);
+
+    for (let filmName of this.allFilms) {
+      if (filmName.name === e.target.value) {
+
+        filmName.name;
+          console.log(filmName.name); 
+      }
+
+    }
+
+    console.dir(e.target.value);
   }
+
+  visible() {
+    console.log(this.allFilms.filter(item => item));
+  }
+
+
+  ngOnInit() {
+    this.allFilms = this.filmsService.getData(); 
+    this.filmFiltered = this.allFilms.filter(item => item.isFavorite);
+    this.favorites = this.filmFiltered.length;  
+
+    console.log(this.allFilms.length);    
+  }
+}
 
