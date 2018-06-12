@@ -7,22 +7,14 @@ import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 })
 export class FilmItemComponent implements OnInit { 
   @Input() item; 
-  @Output() updateCounter = new EventEmitter<any>();
-  @Output() reduceCounter = new EventEmitter<any>();
-
-  isFavor;
-  isPressed = false;
+  @Output() updateCounter = new EventEmitter<any>();  
 
   constructor() { }
   
   addToFavorites(filmId) {
     this.item.isFavorite = !this.item.isFavorite;
-    this.updateCounter.emit(filmId);
-    this.isPressed = !this.isPressed; 
+    this.updateCounter.emit(filmId);    
   }
   
-  ngOnInit() {
-   
-  }
-
+  ngOnInit() {}
 }

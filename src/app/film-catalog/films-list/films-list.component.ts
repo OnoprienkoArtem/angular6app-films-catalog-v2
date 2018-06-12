@@ -16,9 +16,8 @@ export class FilmsListComponent implements OnInit {
     { value: 'ASC', viewValue: 'По алфавиту: A-Z' },
     { value: 'DESC', viewValue: 'По алфавиту: Z-A' }
   ];
-  show: boolean = true;
-
-
+  show = true;
+  
   constructor(public filmsService: FilmService) { }
 
   addFilmObj(filmObj) {    
@@ -38,22 +37,15 @@ export class FilmsListComponent implements OnInit {
     return 0;
   }
 
-  filmName: string;
-  changInput(e) {
-    // this.filmName = this.allFilms.filter(item => item.name);
-    // console.log(this.allFilms[1].name);
 
-    for (let filmName of this.allFilms) {
-      if (filmName.name === e.target.value) {
-
-        filmName.name;
-          console.log(filmName.name); 
-      }
-
-    }
-
-    console.dir(e.target.value);
+  changInput(e) {  
+    this.filmFiltered = this.allFilms.filter(item => {
+      if (item.name.toLowerCase() === e.target.value.toLowerCase()) {       
+        console.log(item.name);
+      }  
+    });    
   }
+
 
   visible() {
     console.log(this.allFilms.filter(item => item));
@@ -63,9 +55,7 @@ export class FilmsListComponent implements OnInit {
   ngOnInit() {
     this.allFilms = this.filmsService.getData(); 
     this.filmFiltered = this.allFilms.filter(item => item.isFavorite);
-    this.favorites = this.filmFiltered.length;  
-
-    console.log(this.allFilms.length);    
+    this.favorites = this.filmFiltered.length;      
   }
 }
 
