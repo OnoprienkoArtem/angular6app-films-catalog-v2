@@ -7,32 +7,25 @@ import { FilmItemComponent } from '../film-item/film-item.component';
   styleUrls: ['./films-list.component.css']
 })
 export class FilmsListComponent implements OnInit {
-  items: object[] = [];  
-
-  constructor(public filmsService: FilmService) { }
-
+  items: object[] = []; 
+  filmFiltered: object[];
   favorites: number = 0;
-
   allFilms;
   selectedValue: string;
-
   sortOptions = [
     { value: 'ASC', viewValue: 'По алфавиту: A-Z' },
     { value: 'DESC', viewValue: 'По алфавиту: Z-A' }
   ];
+  show = true;
+  
+  constructor(public filmsService: FilmService) { }
 
-  onChanged(increased: any) {
-    if(increased == true) {
-      this.favorites++;
-    }  
-  }
+  addFilmObj(filmObj) {    
+    this.filmFiltered = this.allFilms.filter(item => item.isFavorite);   
+    this.favorites = this.filmFiltered.length; 
+  } 
 
-  ngOnInit() {
-    this.allFilms = this.filmsService.getData();
-      
-    } 
-
-  sortedList(elem, option?) {
+  sortList(elem, option?) {
     if (option === 'DESC') {
       return elem.sort(this.sortByName).reverse();
     }
@@ -43,5 +36,26 @@ export class FilmsListComponent implements OnInit {
     if (a.name > b.name) { return 1; }
     return 0;
   }
+
+
+  changInput(e) {  
+    this.filmFiltered = this.allFilms.filter(item => {
+      if (item.name.toLowerCase() === e.target.value.toLowerCase()) {       
+        console.log(item.name);
+      }  
+    });    
   }
+
+
+  visible() {
+    console.log(this.allFilms.filter(item => item));
+  }
+
+
+  ngOnInit() {
+    this.allFilms = this.filmsService.getData(); 
+    this.filmFiltered = this.allFilms.filter(item => item.isFavorite);
+    this.favorites = this.filmFiltered.length;      
+  }
+}
 
