@@ -21,13 +21,13 @@
 
   <mat-grid-list cols="3" rowHeight="750px">
     <mat-grid-tile colspan="1" *ngFor="let item of sortList(allFilms, selectedValue)">
-      <app-film-item [item]="item" (updateCounter)="addFilmObj($event)" *ngIf="item.visible" ></app-film-item>
+      <app-film-item [item]="item" (updateCounter)="addFilmObj($event)"></app-film-item>
     </mat-grid-tile>
   </mat-grid-list>
 
 
 <mat-card>
-  <button mat-button (click)="visible($event)">{{show ? 'Загрузить еще' : '---'}}</button>
+  <button mat-button (click)="loadFilms(3)" [disabled]="!((filteredFilms.length - filmsOnPage)>0)">еще</button>
 </mat-card>
 
 
