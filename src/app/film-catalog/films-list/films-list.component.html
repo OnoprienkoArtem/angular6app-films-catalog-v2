@@ -10,7 +10,7 @@
       </form>
         <div>
           <mat-form-field>
-            <mat-select placeholder="Сортировка" [(value)]='selectedValue'>
+            <mat-select placeholder="Сортировка" [(value)]='selectedValue' (selectionChange)="doSort(selectedValue)">
               <mat-option *ngFor="let item of sortOptions" [value]="item.value"> {{item.viewValue}}</mat-option>           
             </mat-select>
           </mat-form-field>
@@ -19,16 +19,21 @@
     </mat-toolbar>
   </mat-card>
 
+<ng-template #noFilms>
+  <div class="row">
+    <p>По запросу "{{ 3 }}" ничего не найдено...</p>
+  </div>
+</ng-template>
+<section *ngIf="Films.length; else noFilms">    
   <mat-grid-list cols="3" rowHeight="750px">
-    <mat-grid-tile colspan="1" *ngFor="let item of sortList(allFilms, selectedValue)">
+    <mat-grid-tile colspan="1" *ngFor="let item of Films">
       <app-film-item [item]="item" (updateCounter)="addFilmObj($event)"></app-film-item>
     </mat-grid-tile>
   </mat-grid-list>
 
-
-<mat-card>
-  <button mat-button (click)="loadFilms(3)" [disabled]="!((filteredFilms.length - filmsOnPage)>0)">еще</button>
-</mat-card>
-
+  <mat-card>
+    <button mat-button (click)="loadFilms(3)" [disabled]="!((filteredFilms.length - filmsOnPage)>0)">еще</button>
+  </mat-card>
+</section>
 
 
