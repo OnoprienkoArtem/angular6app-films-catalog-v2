@@ -4,11 +4,8 @@
         <span >В избранное добавлено: {{ favorites }} элементов</span>
         <span class="example-spacer"></span>
         <form class="example-form">
-        <mat-form-field class="example-full-width">
-
-          
-          <input matInput #query type="text" placeholder="search..." (keyup)="filter(query.value)" />    
- 
+        <mat-form-field class="example-full-width">          
+          <input matInput #query type="text" placeholder="search..." (keyup)="filter(query.value)" />
           <button mat-button *ngIf="query.value" matSuffix mat-icon-button aria-label="Clear" (click)="query.value=''; filter()">
             <mat-icon>close</mat-icon>
           </button>
@@ -39,7 +36,7 @@
     </mat-grid-tile>
   </mat-grid-list>
   <mat-card>
-    <button class='load' mat-button (click)="loadFilms(3)" [disabled]="!((filteredFilms.length - filmsOnPage)>0)">еще</button>
+    <button class='load' mat-button (click)="loadFilms(3)" [disabled]="!((filteredFilms.length - filmsOnPage)>0)">more...</button>
   </mat-card>
 </section>
 
