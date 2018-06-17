@@ -1,11 +1,17 @@
-  <mat-card class="menu-card">
+  <mat-card>
     <mat-toolbar class="menu-toolbar">
       <mat-toolbar-row>
         <span >В избранное добавлено: {{ favorites }} элементов</span>
         <span class="example-spacer"></span>
         <form class="example-form">
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="search" value="" (change)='changInput($event)'>
+
+          
+          <input matInput #query type="text" placeholder="search..." (keyup)="filter(query.value)" />    
+ 
+          <button mat-button *ngIf="query.value" matSuffix mat-icon-button aria-label="Clear" (click)="query.value=''; filter()">
+            <mat-icon>close</mat-icon>
+          </button>
         </mat-form-field>    
       </form>
         <div>
@@ -21,18 +27,19 @@
 
 <ng-template #noFilms>
   <div class="row">
-    <p>По запросу "{{ 3 }}" ничего не найдено...</p>
+    <p>По запросу "{{ query.value }}" ничего не найдено...</p>
   </div>
 </ng-template>
+
+
 <section *ngIf="Films.length; else noFilms">    
   <mat-grid-list cols="3" rowHeight="750px">
     <mat-grid-tile colspan="1" *ngFor="let item of Films">
       <app-film-item [item]="item" (updateCounter)="addFilmObj($event)"></app-film-item>
     </mat-grid-tile>
   </mat-grid-list>
-
   <mat-card>
-    <button mat-button (click)="loadFilms(3)" [disabled]="!((filteredFilms.length - filmsOnPage)>0)">еще</button>
+    <button class='load' mat-button (click)="loadFilms(3)" [disabled]="!((filteredFilms.length - filmsOnPage)>0)">еще</button>
   </mat-card>
 </section>
 

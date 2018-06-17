@@ -67,6 +67,11 @@ export class FilmsListComponent implements OnInit {
     });    
   }
 
+  filter(query?: string) {
+    this.filteredFilms = (query) ?
+      this.items.filter(item => item.name.toLowerCase().includes(query.toLowerCase())) : this.items;
+  }
+
 
   ngOnInit() {
     this.allFilms = this.filmsService.getData();   

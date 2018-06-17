@@ -10,6 +10,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+
 
 import { FilmItemComponent } from './film-item/film-item.component';
 import { FilmsListComponent } from './films-list/films-list.component';
@@ -24,7 +26,8 @@ import { FilmsListComponent } from './films-list/films-list.component';
     MatSelectModule,
     MatToolbarModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   declarations: [
     MainComponent,
