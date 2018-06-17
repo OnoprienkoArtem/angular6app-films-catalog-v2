@@ -7,12 +7,17 @@ section {
     box-shadow: none !important;
     padding: 10px;
     margin: auto;
+
 }
+
+
 
 .menu-toolbar {
     background-color: white;
     font-size: 1vw;
 }
+
+
 
 .example-spacer {
     flex: 1 1 auto;
@@ -26,12 +31,6 @@ section {
 .grid {
   display: grid;
   grid-template-columns: auto auto auto;
-}
-
-.mat-form-field {  
-    line-height: 1;
-    padding-bottom: 0;
-   
 }
 
 .cdk-overlay-pane {
@@ -51,17 +50,21 @@ form {
 .mat-form-field {
     width: 200px;
     margin-left: 5%;
+    line-height: 1;
+    padding-bottom: 0;
 }
 
 .load {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2),
                 0 2px 2px 0 rgba(0, 0, 0, .14),
                 0 1px 5px 0 rgba(0, 0, 0, .12);
-    background-color: cornflowerblue;
+    background: rgb(63, 81, 181);
+    color: white;
 }
 
 button[disabled][disabled] {
-    background-color: rgba(99, 147, 236, 0.5);
+    opacity: .5;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .mat-icon {
