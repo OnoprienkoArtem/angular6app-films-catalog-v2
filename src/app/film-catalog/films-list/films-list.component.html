@@ -14,7 +14,7 @@
         <div>
           <mat-form-field>
             <mat-select placeholder="Сортировка" [(value)]='selectedValue' (selectionChange)="doSort(selectedValue)">
-              <mat-option *ngFor="let item of sortOptions" [value]="item.value"> {{item.viewValue}}</mat-option>           
+              <mat-option *ngFor="let item of sortOptions" [value]="item.value"> {{item.viewValue}}</mat-option>        
             </mat-select>
           </mat-form-field>
         </div>
@@ -27,7 +27,6 @@
     <p>По запросу "{{ query.value }}" ничего не найдено...</p>
   </div>
 </ng-template>
-
 
 <section *ngIf="Films.length; else noFilms">    
   <mat-grid-list cols="3" rowHeight="750px">
