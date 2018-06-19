@@ -7,40 +7,33 @@ section {
     box-shadow: none !important;
     padding: 10px;
     margin: auto;
-
 }
-
-
 
 .menu-toolbar {
     background-color: white;
     font-size: 1vw;
 }
 
-
+.mat-icon {
+    width: 14px;
+    height: 14px;
+}
 
 .example-spacer {
     flex: 1 1 auto;
 }
+
+.example-full-width {
+    width: 60%;
+}
+
+
 
 .mat-grid-list {
     width: 85%;
     margin: auto;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: auto auto auto;
-}
-
-.cdk-overlay-pane {
-    top: 90px !important;
-    left: 1150px !important;
-}
-
-.example-full-width {
-    width: 60%;
-}
 
 
 form {
@@ -67,15 +60,7 @@ button[disabled][disabled] {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.mat-icon {
-    width: 14px;
-    height: 14px;
-}
 
-.material-icons {
-    font-size: 15px;
-    cursor: pointer;
-}
 
 .row {
     display: flex;
