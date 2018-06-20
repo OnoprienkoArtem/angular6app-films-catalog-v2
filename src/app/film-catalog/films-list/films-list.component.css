@@ -1,72 +1,30 @@
-section {
-    overflow-y: scroll;
-    height: calc(750px);
+.example-card {
+  max-width: 300px;
 }
 
-.mat-card {
-    box-shadow: none !important;
-    padding: 10px;
-    margin: auto;
+.menu-card {
+  padding: 0px;
 }
 
 .menu-toolbar {
-    background-color: white;
-    font-size: 1vw;
-}
-
-.mat-icon {
-    width: 14px;
-    height: 14px;
+  background-color: white;
 }
 
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
-.example-full-width {
-    width: 60%;
+mat-grid-list {
+  margin: 1rem 3rem 0;
 }
-
-
-
-.mat-grid-list {
-    width: 85%;
-    margin: auto;
+.main-container {
+  float: left;
+  position: relative;
+  left: 50%;
+  padding-bottom: 50px;
 }
-
-
-
-form {
-    margin-right: 5%;
+.fixer-container {
+  float: left;
+  position: relative;
+  left: -50%;
 }
-
-.mat-form-field {
-    width: 200px;
-    margin-left: 5%;
-    line-height: 1;
-    padding-bottom: 0;
-}
-
-.load {
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2),
-                0 2px 2px 0 rgba(0, 0, 0, .14),
-                0 1px 5px 0 rgba(0, 0, 0, .12);
-    background: rgb(63, 81, 181);
-    color: white;
-}
-
-button[disabled][disabled] {
-    opacity: .5;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-
-
-.row {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    margin-top: 1rem;
-    margin-bottom: 3rem;
-}
-

@@ -1,42 +1,37 @@
-  <mat-card>
-    <mat-toolbar class="menu-toolbar">
-      <mat-toolbar-row>
-        <span >В избранное добавлено: {{ favorites }} элементов</span>
-        <span class="example-spacer"></span>
-        <form class="example-form">
-        <mat-form-field class="example-full-width">          
-          <input matInput #query type="text" placeholder="search..." (keyup)="filter(query.value)" />
-          <button mat-button *ngIf="query.value" matSuffix mat-icon-button aria-label="Clear" (click)="query.value=''; filter()">
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>    
-      </form>
-        <div>
-          <mat-form-field>
-            <mat-select placeholder="Сортировка" [(value)]='selectedValue' (selectionChange)="doSort(selectedValue)">
-              <mat-option *ngFor="let item of sortOptions" [value]="item.value"> {{item.viewValue}}</mat-option>        
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </mat-toolbar-row>
-    </mat-toolbar>
-  </mat-card>
+<mat-card class="menu-card">
 
-<ng-template #noFilms>
-  <div class="row">
-    <p>По запросу "{{ query.value }}" ничего не найдено...</p>
+  <mat-toolbar class="menu-toolbar">
+    <mat-toolbar-row>
+      <span>В избранное добавлено: {{favoriteFilmsCount}} элементов</span> &nbsp;
+      <button mat-raised-button (click)="directUpdateChildren()">Один Дочерний компонент</button> &nbsp;
+      <button mat-raised-button (click)="directUpdateAllChildren()">Все Дочерние компоненты</button>
+      <button mat-raised-button (click)="count()">++</button>
+      <span class="example-spacer"></span>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Сортировка" [(value)]="sortOption" (selectionChange)="sortFilmCards()">
+            <mat-option *ngFor="let option of sortOptions" [value]="option.value">
+              {{option.description}}
+            </mat-option>
+            <mat-option value="default">Default</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+</mat-card>
+
+<mat-grid-list cols="3" rowHeight="840px">
+  <mat-grid-tile colspan="1" *ngFor="let film of filmsData">
+    <app-film-item [film]="film" [counter]="counter" (star)="makeStar($event)"></app-film-item>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+<div class="main-container">
+  <div class="fixer-container">
+    <button mat-raised-button color="primary" [disabled]="true">Загрузить еще</button>
   </div>
-</ng-template>
-
-<section *ngIf="Films.length; else noFilms">    
-  <mat-grid-list cols="3" rowHeight="750px">
-    <mat-grid-tile colspan="1" *ngFor="let item of Films">
-      <app-film-item [item]="item" (updateCounter)="addFilmObj($event)"></app-film-item>
-    </mat-grid-tile>
-  </mat-grid-list>
-  <mat-card>
-    <button class='load' mat-button (click)="loadFilms(3)" [disabled]="!((filteredFilms.length - filmsOnPage)>0)">more...</button>
-  </mat-card>
-</section>
-
+</div>
 
