@@ -1,87 +1,88 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, ViewChildren, QueryList } from '@angular/core';
 import { FilmService } from '../film.service';
+import { Film } from '../../film';
+import { SortOption } from '../../sort-option';
 import { FilmItemComponent } from '../film-item/film-item.component';
+
 @Component({
-  selector: 'app-films-list',
+  selector: '.films',
   templateUrl: './films-list.component.html',
   styleUrls: ['./films-list.component.css']
 })
 export class FilmsListComponent implements OnInit {
-  items: object[] = []; 
-  filmFiltered: object[];
-  favorites: number = 0;
-  allFilms;
-  selectedValue: string;
+  filmsData: Film[];
+  sortOption: any;
+  counter: number = 0;
+  favoriteFilmsCount: number = 0;
 
-  sortOptions = [
-    { value: 'default', viewValue: 'По умолчанию' },
-    { value: 'ASC', viewValue: 'По алфавиту: A-Z' },
-    { value: 'DESC', viewValue: 'По алфавиту: Z-A' }
+  sortOptions: SortOption[] = [
+    { value: 1, description: 'По алфавиту: A-Z' },
+    { value: -1, description: 'По алфавиту: Z-A' }
   ];
-  show = true;
 
-  private filteredFilms: Object[];
-  private filmsOnPage: number = 3;
+  // Получаем доступ к дочернему компоненту напрямую используя ViewChild
+  @ViewChild(FilmItemComponent) filmItem: FilmItemComponent;
 
-  doSort(order: string) {
-    (order === 'default' || order === '') ?
-      (this.filteredFilms.sort(this.compareValues('id', order)), this.selectedValue = '') :
-      this.filteredFilms.sort(this.compareValues('name', order));
+  // Получаем доступ к списку дочерних компонентов напрямую используя ViewChildred
+  @ViewChildren(FilmItemComponent) films: QueryList<FilmItemComponent>;
+
+
+  constructor(public filmsService: FilmService) {
   }
 
-  compareValues(key, order = 'ASC') {
-    return (a, b) => {
-      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) { return 0; }
-      const varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
-      const varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
-      let comparison = 0;
-      if (varA > varB) { comparison = 1; }
-      else if (varA < varB) { comparison = -1; }
-      return ((order === 'DESC') ? (comparison * -1) : comparison);
-    };
+  ngAfterViewInit() {
+    console.log("Hook Parent, Все дочерние компоненты отрендерены");
   }
 
- 
-  constructor(public filmsService: FilmService) { }
-
-  addFilmObj(filmObj) {    
-    this.filmFiltered = this.allFilms.filter(item => item.isFavorite);   
-    this.favorites = this.filmFiltered.length; 
-  } 
-
-
-  loadFilms(cnt: number = 3) {
-    this.filmsOnPage += cnt;
+  directUpdateChildren() {
+    console.log("вызываем логику дочернего компонента напрямую");
+    let result = this.filmItem.showFilmInfo();
+    console.log(result);
   }
 
-  get Films() {
-    return this.filteredFilms.slice(0, this.filmsOnPage)
+  directUpdateAllChildren() {
+    console.log("вызываем логику в каждом дочернем компоненте")
+    this.films.forEach(item => {
+      item.showFilmInfo();
+    });
   }
 
-
-  changInput(e) {  
-    this.filmFiltered = this.allFilms.filter(item => {
-      if (item.name.toLowerCase() === e.target.value.toLowerCase()) {       
-        console.log(item.name);
-      }  
-    });    
+  count() {
+    this.counter++;
   }
-
-  filter(query?: string) {
-    this.filteredFilms = (query) ?
-      this.items.filter(item => item.name.toLowerCase().includes(query.toLowerCase())) : this.items;
-  }
-
 
   ngOnInit() {
-    this.allFilms = this.filmsService.getData();   
-
-    this.items = this.filteredFilms = this.filmsService.getData(); 
-
-    this.filmFiltered = this.allFilms.filter(item => item.isFavorite);
-    this.favorites = this.filmFiltered.length;      
+    console.log("Hook Parent, Инициализация родительского компонента")
+    this.filmsData = this.filmsService.getFilms();
+    this.filmsService.getPopularFilms().subscribe(
+      (filmList: any) => {
+        console.log(filmList);
+        console.log(`${this.filmsService.midImgPath}${filmList.results[2].poster_path}`)
+      },
+      err => {
+        console.log("error");
+      })
   }
 
+  sortFilms(arr: Film[], numDirect: number): Film[] {
+    return arr.sort((a, b) => {
+      let x = a.name.toLowerCase();
+      let y = b.name.toLowerCase();
+      if (x < y) { return -1 * numDirect; }
+      if (x > y) { return numDirect; }
+      return 0;
+    })
+  }
 
+  sortFilmCards() {
+    this.filmsData = (this.sortOption === "default")
+      ? this.filmsService.getFilms()
+      : this.sortFilms(this.filmsData, this.sortOption);
+  }
+
+  makeStar(film: Film) {
+    film.isFavorite = !film.isFavorite;
+    let favoriteFilms = this.filmsData.filter(item => item.isFavorite);
+    this.favoriteFilmsCount = favoriteFilms.length;
+  }
 }
-
